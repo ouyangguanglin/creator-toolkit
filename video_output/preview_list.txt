@@ -1,0 +1,6 @@
+file 'frames/frame_001.png'
+duration 15
+file 'frames/frame_002.png'
+duration 15
+file 'frames/frame_003.png'
+duration 30
