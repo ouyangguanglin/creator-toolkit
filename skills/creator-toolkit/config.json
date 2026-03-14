@@ -1,0 +1,36 @@
+{
+  "name": "creator-toolkit",
+  "version": "0.1.0",
+  "description": "个人创作者工具箱 - 批量图片处理、多平台发布、格式转换",
+  "author": "TTunn",
+  "license": "MIT",
+  "homepage": "https://github.com/yourusername/creator-toolkit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/creator-toolkit.git"
+  },
+  "updateUrl": "https://raw.githubusercontent.com/yourusername/creator-toolkit/main/update.json",
+  "main": "scripts/main.sh",
+  "binaries": ["java", "curl"],
+  "scripts": {
+    "compress": "scripts/compress.sh",
+    "publish": "scripts/publish.sh",
+    "convert": "scripts/convert.sh",
+    "watermark": "scripts/watermark.sh"
+  },
+  "config": {
+    "defaultQuality": 85,
+    "defaultFormat": "webp"
+  },
+  "pricing": {
+    "free": {
+      "batchLimit": 10,
+      "platformLimit": 2
+    },
+    "pro": {
+      "monthly": 29,
+      "yearly": 299,
+      "lifetime": 599
+    }
+  }
+}

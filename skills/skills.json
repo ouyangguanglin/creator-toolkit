@@ -1,0 +1,119 @@
+{
+  "name": "虾王技能市场",
+  "description": "个人创作者效率工具集合",
+  "version": "1.0.0",
+  "updatedAt": "2026-03-13T07:30:00+08:00",
+  "author": "TTunn",
+  "homepage": "https://github.com/yourusername/creator-skills",
+  "skills": [
+    {
+      "name": "creator-toolkit",
+      "slug": "creator-toolkit",
+      "version": "0.1.0",
+      "description": "个人创作者工具箱 - 批量图片处理、多平台发布、格式转换",
+      "author": "TTunn",
+      "homepage": "https://github.com/yourusername/creator-toolkit",
+      "repository": "https://github.com/yourusername/creator-toolkit.git",
+      "updateUrl": "https://raw.githubusercontent.com/yourusername/creator-toolkit/main/update.json",
+      "downloadUrl": "https://github.com/yourusername/creator-toolkit/archive/refs/heads/main.zip",
+      "tags": ["创作者", "图片处理", "发布", "效率工具", "Java"],
+      "category": "效率工具",
+      "pricing": {
+        "type": "freemium",
+        "free": true,
+        "pro": {
+          "monthly": 29,
+          "yearly": 299,
+          "lifetime": 599
+        }
+      },
+      "requirements": {
+        "bins": ["java", "curl"],
+        "java": "17+"
+      },
+      "featured": true,
+      "downloads": 0,
+      "rating": 0,
+      "createdAt": "2026-03-13T07:30:00+08:00",
+      "updatedAt": "2026-03-13T07:30:00+08:00"
+    },
+    {
+      "name": "moltbook-publisher",
+      "slug": "moltbook-publisher",
+      "version": "1.0.0",
+      "description": "Moltbook 自动发布工具 - 定时发布、批量发布、内容管理",
+      "author": "虾王",
+      "homepage": "https://github.com/yourusername/moltbook-publisher",
+      "repository": "https://github.com/yourusername/moltbook-publisher.git",
+      "tags": ["Moltbook", "发布", "自动化", "社交媒体"],
+      "category": "社交媒体",
+      "pricing": {
+        "type": "free",
+        "free": true
+      },
+      "requirements": {
+        "bins": ["curl", "bash"]
+      },
+      "featured": false,
+      "downloads": 0,
+      "rating": 0,
+      "createdAt": "2026-03-13T07:30:00+08:00",
+      "updatedAt": "2026-03-13T07:30:00+08:00"
+    },
+    {
+      "name": "article-humanizer",
+      "slug": "article-humanizer",
+      "version": "1.0.0",
+      "description": "文章润色工具 - 去除 AI 痕迹，让内容更像人类写作",
+      "author": "虾王",
+      "homepage": "https://github.com/yourusername/article-humanizer",
+      "repository": "https://github.com/yourusername/article-humanizer.git",
+      "tags": ["AI", "润色", "写作", "内容优化"],
+      "category": "内容创作",
+      "pricing": {
+        "type": "freemium",
+        "free": true,
+        "pro": {
+          "monthly": 19,
+          "yearly": 199,
+          "lifetime": 399
+        }
+      },
+      "requirements": {
+        "bins": ["curl", "node"]
+      },
+      "featured": true,
+      "downloads": 0,
+      "rating": 0,
+      "createdAt": "2026-03-13T07:30:00+08:00",
+      "updatedAt": "2026-03-13T07:30:00+08:00"
+    }
+  ],
+  "categories": [
+    {
+      "id": "efficiency",
+      "name": "效率工具",
+      "description": "提升创作效率的工具"
+    },
+    {
+      "id": "social",
+      "name": "社交媒体",
+      "description": "社交媒体管理和发布工具"
+    },
+    {
+      "id": "content",
+      "name": "内容创作",
+      "description": "内容创作和优化工具"
+    },
+    {
+      "id": "automation",
+      "name": "自动化",
+      "description": "自动化工作流和定时任务"
+    }
+  ],
+  "stats": {
+    "totalSkills": 3,
+    "totalDownloads": 0,
+    "featuredSkills": 2
+  }
+}

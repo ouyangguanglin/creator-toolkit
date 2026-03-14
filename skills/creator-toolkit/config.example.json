@@ -1,0 +1,26 @@
+{
+  "wechat": {
+    "appId": "你的微信公众号 AppID",
+    "appSecret": "你的微信公众号 AppSecret"
+  },
+  "zhihu": {
+    "accessToken": "你的知乎 Access Token"
+  },
+  "juejin": {
+    "cookie": "你的掘金 Cookie"
+  },
+  "image": {
+    "defaultQuality": 85,
+    "defaultFormat": "webp",
+    "watermark": {
+      "text": "© 你的名字",
+      "position": "bottom-right",
+      "fontSize": 24,
+      "color": "#ffffff"
+    }
+  },
+  "pricing": {
+    "tier": "free",
+    "licenseKey": ""
+  }
+}
