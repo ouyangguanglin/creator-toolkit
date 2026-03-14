@@ -1,3 +1,5 @@
-com/creator/toolkit/platform/MoltbookPublisher.class
 com/creator/toolkit/image/ImageService.class
+com/creator/toolkit/web/HomeController.class
+com/creator/toolkit/web/ImageController.class
+com/creator/toolkit/platform/MoltbookPublisher.class
 com/creator/toolkit/CreatorToolkitApplication.class

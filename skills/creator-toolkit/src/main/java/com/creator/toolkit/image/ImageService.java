@@ -20,6 +20,17 @@ import java.io.IOException;
 public class ImageService {
 
     /**
+     * 压缩单个图片
+     */
+    public void compressImage(String inputFile, String outputFile, 
+                              float quality, int maxWidth, int maxHeight) throws IOException {
+        Thumbnails.of(new File(inputFile))
+            .size(maxWidth, maxHeight)
+            .outputQuality(quality)
+            .toFile(new File(outputFile));
+    }
+
+    /**
      * 批量压缩图片
      * 
      * @param inputDir 输入目录

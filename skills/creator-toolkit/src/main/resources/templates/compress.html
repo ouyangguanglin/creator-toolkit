@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦞 CreatorToolkit - 批量图片压缩</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .upload-area:hover {
+            border-color: #764ba2;
+            background: #f8f9ff;
+        }
+        .upload-area.dragover {
+            border-color: #764ba2;
+            background: #f0f2ff;
+        }
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .file-input {
+            display: none;
+        }
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .settings {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+        }
+        .setting-item {
+            margin-bottom: 15px;
+        }
+        .setting-item label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
+        }
+        .setting-item input[type="range"] {
+            width: 100%;
+        }
+        .file-list {
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .file-name {
+            color: #333;
+            flex: 1;
+        }
+        .file-size {
+            color: #999;
+            font-size: 12px;
+        }
+        .progress {
+            display: none;
+            margin: 20px 0;
+        }
+        .progress-bar {
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .result {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f0fff4;
+            border-radius: 10px;
+            border: 2px solid #48bb78;
+        }
+        .result h3 {
+            color: #2f855a;
+            margin-bottom: 10px;
+        }
+        .download-link {
+            color: #667eea;
+            text-decoration: none;
+            margin: 5px 0;
+            display: block;
+        }
+        .download-link:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+        }
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🦞 CreatorToolkit</h1>
+        <p class="subtitle">批量图片压缩工具 - 为创作者赋能</p>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="upload-area" id="uploadArea" onclick="document.getElementById('files').click()">
+                <div class="upload-icon">📁</div>
+                <p>点击选择图片或拖拽文件到此处</p>
+                <p style="color: #999; font-size: 12px; margin-top: 10px;">支持 PNG, JPG, JPEG, WebP 格式</p>
+                <input type="file" id="files" name="files" class="file-input" multiple accept="image/*">
+            </div>
+
+            <div class="settings">
+                <div class="setting-item">
+                    <label>压缩质量：<span id="qualityValue">80</span>%</label>
+                    <input type="range" id="quality" name="quality" min="0.1" max="1.0" step="0.05" value="0.8">
+                </div>
+                <div class="setting-item">
+                    <label>最大宽度：1920px</label>
+                </div>
+                <div class="setting-item">
+                    <label>最大高度：1080px</label>
+                </div>
+            </div>
+
+            <div class="file-list" id="fileList"></div>
+
+            <div style="text-align: center;">
+                <button type="submit" class="btn" id="submitBtn">
+                    🚀 开始压缩
+                </button>
+            </div>
+        </form>
+
+        <div class="progress" id="progress">
+            <p style="text-align: center; color: #666; margin-bottom: 10px;">正在压缩...</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="result" id="result">
+            <h3>✅ 压缩完成！</h3>
+            <div id="downloadLinks"></div>
+        </div>
+
+        <div class="footer">
+            <p>🦞 虾王出品 · <a href="https://github.com/ouyangguanglin/creator-toolkit" target="_blank">GitHub 项目</a></p>
+            <p>Powered by Spring Boot + Java 17</p>
+        </div>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const filesInput = document.getElementById('files');
+        const fileList = document.getElementById('fileList');
+        const qualitySlider = document.getElementById('quality');
+        const qualityValue = document.getElementById('qualityValue');
+        const uploadForm = document.getElementById('uploadForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const progress = document.getElementById('progress');
+        const progressFill = document.getElementById('progressFill');
+        const result = document.getElementById('result');
+        const downloadLinks = document.getElementById('downloadLinks');
+
+        let selectedFiles = [];
+
+        // 更新质量值
+        qualitySlider.addEventListener('input', (e) => {
+            qualityValue.textContent = Math.round(e.target.value * 100);
+        });
+
+        // 文件选择
+        filesInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        // 拖拽支持
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        function handleFiles(files) {
+            selectedFiles = Array.from(files);
+            fileList.innerHTML = selectedFiles.map(file => `
+                <div class="file-item">
+                    <span class="file-name">${file.name}</span>
+                    <span class="file-size">${formatFileSize(file.size)}</span>
+                </div>
+            `).join('');
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        // 提交表单
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (selectedFiles.length === 0) {
+                alert('请选择文件！');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            progress.style.display = 'block';
+            result.style.display = 'none';
+            progressFill.style.width = '0%';
+
+            const formData = new FormData();
+            selectedFiles.forEach(file => {
+                formData.append('files', file);
+            });
+            formData.append('quality', qualitySlider.value);
+
+            try {
+                // 模拟进度
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 10;
+                    if (progress <= 90) {
+                        progressFill.style.width = progress + '%';
+                    }
+                }, 200);
+
+                const response = await fetch('/image/compress', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                clearInterval(interval);
+                progressFill.style.width = '100%';
+
+                const filenames = await response.json();
+                
+                // 显示结果
+                downloadLinks.innerHTML = filenames.map(filename => `
+                    <a href="/image/download/${filename}" class="download-link" target="_blank">
+                        📥 下载 ${filename}
+                    </a>
+                `).join('');
+                
+                result.style.display = 'block';
+            } catch (error) {
+                alert('压缩失败：' + error.message);
+            } finally {
+                submitBtn.disabled = false;
+                setTimeout(() => {
+                    progress.style.display = 'none';
+                    progressFill.style.width = '0%';
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
