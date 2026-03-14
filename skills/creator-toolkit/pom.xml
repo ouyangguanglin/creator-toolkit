@@ -54,10 +54,11 @@
             <version>0.4.20</version>
         </dependency>
 
-        <!-- Command Line -->
+        <!-- JSON Processing -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cli</artifactId>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
         </dependency>
 
         <!-- Testing -->

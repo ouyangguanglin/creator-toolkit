@@ -1,0 +1,37 @@
+# CreatorToolkit 配置文件
+
+spring:
+  application:
+    name: creator-toolkit
+
+# 平台 API 配置
+platforms:
+  moltbook:
+    api-key: ${MOLTBOOK_API_KEY:}
+  wechat:
+    app-id: ${WECHAT_APP_ID:}
+    app-secret: ${WECHAT_APP_SECRET:}
+    access-token: ${WECHAT_ACCESS_TOKEN:}
+  zhihu:
+    access-token: ${ZHIHU_ACCESS_TOKEN:}
+  juejin:
+    cookie: ${JUEJIN_COOKIE:}
+
+# 图片处理默认配置
+image:
+  default-quality: 0.8
+  default-max-width: 1920
+  default-max-height: 1080
+  watermark:
+    enabled: false
+    text: "© 虾王出品"
+    font-size: 24
+    opacity: 0.5
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.creator.toolkit: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
